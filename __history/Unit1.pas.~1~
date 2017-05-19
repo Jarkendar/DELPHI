@@ -1,0 +1,91 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    label_description: TLabel;
+    edit_input: TEdit;
+    button_accept: TButton;
+    procedure click_accept_Unit1(Sender: TObject);
+    procedure zamknij_okno(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  stopien : integer;
+  tablica : array of Double;
+  rozmiar : integer;
+
+implementation
+
+{$R *.dfm}
+
+uses EAN;
+
+procedure TForm1.click_accept_Unit1(Sender: TObject);
+begin
+if edit_input.Text = '' then
+begin
+  ShowMessage('Pole musi byæ wype³nione');
+end
+else
+begin
+  if label_description.Caption = 'WprowadŸ stopieñ wielomianu:' then
+  begin
+    rozmiar := StrToInt(edit_input.Text);
+    if rozmiar>0 then
+    begin
+      SetLength(tablica,rozmiar+1);
+      label_description.Caption := Concat('Wspó³czynnik przy x^',IntToStr(rozmiar));
+    end
+    else
+    begin
+      ShowMessage('Stopieñ wiêkszy od 0');
+    end;
+  end
+  else
+  begin
+    if rozmiar <> -1  then
+      begin
+        tablica[rozmiar] := StrToInt(edit_input.Text)  ;
+        ShowMessage(FloatToStr(tablica[rozmiar]));
+        rozmiar := rozmiar - 1;
+        label_description.Caption := Concat('Wspó³czynnik przy x^',IntToStr(rozmiar));
+        edit_input.Text := '';
+      end
+      else
+      begin
+        //Kod ukoñczenia wpisywania funkcji, zapis do pliku
+      end;
+  end;
+end;
+
+
+end;
+
+procedure TForm1.zamknij_okno(Sender: TObject; var Action: TCloseAction);
+begin
+  Main.button_function.Enabled := true;
+  Main.button_start.Enabled := true;
+  Main.edit_x0_from.Enabled := true;
+  Main.edit_x0_to.Enabled := true;
+  Main.edit_a_from.Enabled := true;
+  Main.edit_a_to.Enabled := true;
+  Main.edit_b_from.Enabled := true;
+  Main.edit_b_to.Enabled := true;
+  Main.edit_numberIteration.Enabled := true;
+  Main.radio_floatPoint.Enabled := true;
+  Main.radio_Section.Enabled := true;
+  ShowMessage('Nie wprowadzono funkcji');
+end;
+
+end.

@@ -1,0 +1,163 @@
+unit EAN;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TMain = class(TForm)
+    label_aritmetic: TLabel;
+    radio_floatPoint: TRadioButton;
+    radio_Section: TRadioButton;
+    label_input_x0: TLabel;
+    edit_x0_from: TEdit;
+    edit_x0_to: TEdit;
+    button_function: TButton;
+    label_function: TLabel;
+    label_numberIteration: TLabel;
+    edit_numberIteration: TEdit;
+    button_start: TButton;
+    label_score: TLabel;
+    label_iteration: TLabel;
+    label_scoreOutput: TLabel;
+    label_faultOutput: TLabel;
+    label_from: TLabel;
+    label_to: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    edit_a_from: TEdit;
+    edit_a_to: TEdit;
+    Label6: TLabel;
+    Label7: TLabel;
+    edit_b_from: TEdit;
+    edit_b_to: TEdit;
+    procedure clearEditNumerIteration(Sender: TObject);
+    procedure rewriteNumber(Sender: TObject);
+    procedure radioFloatClick(Sender: TObject);
+    procedure radioSectionClick(Sender: TObject);
+    procedure inputFunctionClick(Sender: TObject);
+    procedure startClick(Sender: TObject);
+
+
+
+  private
+    { Private declarations }
+  public
+
+    { Public declarations }
+  end;
+
+type fx = function (x : Extended) : Extended;
+
+var
+  Main: TMain;
+  wielomian : array of Extended;
+  iterator : integer;
+  rownanieWielomianu : String;
+
+  x : Extended;  //pocz¹tkowe przybli¿enie
+  mit : integer; //maksymalna liczba iteracji
+  eps : Extended; //b³¹d wzglêdny
+  fatx : Extended; //wartoœæ funkcji dla
+  it : integer;
+  st :integer;
+  f, df : fx;
+
+implementation
+
+{$R *.dfm}
+
+uses Unit1;
+
+
+procedure ustawWielomian(tablica : array of Extended);
+begin
+  SetLength(wielomian, Length(tablica));
+  rownanieWielomianu := 'y=';
+  iterator := 0;
+  for iterator  := 0 to Length(wielomian) do     //przepisanie tablicy
+  begin
+    wielomian[iterator] := tablica[iterator];
+    rownanieWielomianu := Concat(rownanieWielomianu,
+          FloatToStr(tablica[Length(tablica)-iterator]), 'x^', IntToStr(Length(tablica)-iterator));
+  end;
+
+
+
+end;
+
+procedure TMain.clearEditNumerIteration(Sender: TObject);
+begin
+  edit_numberIteration.Clear;
+end;
+
+procedure TMain.inputFunctionClick(Sender: TObject);
+begin
+//Main.Enabled := false;
+////  Main.button_function.Enabled := false;
+////  Main.button_start.Enabled := false;
+////  Main.edit_x0_from.Enabled := false;
+////  Main.edit_x0_to.Enabled := false;
+////  Main.edit_a_from.Enabled := false;
+////  Main.edit_a_to.Enabled := false;
+////  Main.edit_b_from.Enabled := false;
+////  Main.edit_b_to.Enabled := false;
+////  Main.edit_numberIteration.Enabled := false;
+////  Main.radio_floatPoint.Enabled := false;
+////  Main.radio_Section.Enabled := false;
+//  Form1 := TForm1.Create(Application) ;
+//  Form1.show;
+end;
+
+procedure TMain.radioFloatClick(Sender: TObject);
+begin
+  edit_x0_To.ReadOnly := true;
+  edit_a_To.ReadOnly := true;
+  edit_b_To.ReadOnly := true;
+end;
+
+procedure TMain.radioSectionClick(Sender: TObject);
+begin
+  edit_x0_to.ReadOnly := false;
+  edit_a_to.ReadOnly := false;
+  edit_b_to.ReadOnly := false;
+end;
+
+procedure TMain.rewriteNumber(Sender: TObject);
+begin
+  if radio_floatPoint.Checked then
+    begin
+      edit_x0_to.Text := edit_x0_from.Text;
+      edit_a_to.Text := edit_a_from.Text;
+      edit_b_to.Text := edit_b_from.Text;
+    end;
+end;
+
+
+procedure TMain.startClick(Sender: TObject);
+begin
+     Newton (x, f, df, mit, eps, fatx , it, st)
+end;
+
+function Newton(x, f, df, mit, eps, fatx , it, st) : Extended;
+begin
+
+end;
+
+//FUNKCJE
+function f (x : Extended) : Extended; far;
+begin
+f:=x*x-2;
+end;
+function df (x : Extended) : Extended; far;
+begin
+df:= 2*x;
+end;
+
+
+end.

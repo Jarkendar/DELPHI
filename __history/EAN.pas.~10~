@@ -1,0 +1,206 @@
+﻿unit EAN;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, NewtonMethod, Types, Math;
+
+type
+  TMain = class(TForm)
+    label_aritmetic: TLabel;
+    radio_floatPoint: TRadioButton;
+    radio_Section: TRadioButton;
+    label_input_x0: TLabel;
+    edit_x0_from: TEdit;
+    edit_x0_to: TEdit;
+    label_function: TLabel;
+    label_numberIteration: TLabel;
+    edit_eps: TEdit;
+    button_start: TButton;
+    label_score: TLabel;
+    label_iteration: TLabel;
+    label_scoreOutput: TLabel;
+    label_faultOutput: TLabel;
+    label_from: TLabel;
+    label_to: TLabel;
+    Label3: TLabel;
+    label_blad: TLabel;
+    label_blad_number: TLabel;
+    label_stan: TLabel;
+    label_stan_number: TLabel;
+    edit_max_it: TEdit;
+    label_max_it: TLabel;
+    procedure clearEditNumerIteration(Sender: TObject);
+    procedure rewriteNumber(Sender: TObject);
+    procedure radioFloatClick(Sender: TObject);
+    procedure radioSectionClick(Sender: TObject);
+    procedure startClick(Sender: TObject);
+    function checkFieldX0(mode : Boolean): Boolean;
+    function checkFieldEps():Boolean;
+
+
+
+  private
+    { Private declarations }
+  public
+
+    { Public declarations }
+  end;
+
+var
+  Main: TMain;
+  wielomian : array of Extended;
+  iterator : integer;
+  rownanieWielomianu : String;
+
+  x : Extended;  //początkowe przybliżenie
+  f, df : fx;
+  mit : Integer; //maksymalna liczba iteracji
+  eps : Extended; //błąd względny
+  fatx : Extended; //wartość funkcji dla
+  it : Integer;
+  st : Integer;
+  wynik : Extended;
+
+
+
+
+//  function Newton(x : Extended;  f : fx ; df : fx; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
+
+implementation
+
+{$R *.dfm}
+
+//FUNKCJE
+
+//**************************************************************
+procedure TMain.clearEditNumerIteration(Sender: TObject);
+begin
+  edit_eps.Clear;
+end;
+
+procedure TMain.radioFloatClick(Sender: TObject);
+begin
+  edit_x0_To.ReadOnly := true;
+end;
+
+procedure TMain.radioSectionClick(Sender: TObject);
+begin
+  edit_x0_to.ReadOnly := false;
+end;
+
+procedure TMain.rewriteNumber(Sender: TObject);
+begin
+  if radio_floatPoint.Checked then
+    begin
+      edit_x0_to.Text := edit_x0_from.Text;
+    end;
+end;
+
+
+
+
+
+
+procedure TMain.startClick(Sender: TObject);
+var
+  checkX0 : Boolean;
+  checkMit : Boolean;
+  checkEps : Boolean;
+begin
+  checkX0 := false;
+  checkMit := false;
+  checkEps := false;
+    if radio_floatPoint.Checked then  //wybrano arytmetykę zwykłą
+      begin
+        if checkFieldX0(true) then
+        begin
+          showMessage('x0 się zgadza');
+        end;
+        if checkFieldEps() then
+          begin
+            showMessage('Eps się zgadza');
+          end;
+
+
+        if edit_numberIteration.Text = '' then
+          begin
+            showMessage('Pole nie może być puste');
+          end
+        else
+          begin
+            if StrToInt(edit_numberIteration.Text) = 0 then
+              showMessage('W polu maksymalna ilość iteracji liczba musi być liczba większa od 0!')
+            else
+            begin
+              mit:= StrToInt(edit_numberIteration.Text);
+              checkMit := true;
+              showMessage(Concat('it=',IntToStr(it)));
+            end;
+          end;
+      end
+    else
+    begin
+      //arytmetyka przedziałowa
+    end;
+    it := 0;
+    x := 0;
+    showMessage(Concat('wynik=',FloatToStr(x)));
+    x := Newton (x, f, df, mit, eps, fatx , it, st);
+    showMessage(Concat('it=',IntToStr(it)));
+    showMessage(Concat('wynik=',FloatToStr(x)));
+end;
+
+function TMain.checkFieldX0(mode : Boolean): Boolean;
+begin
+if mode then    //true zwykła, false przedziałowa
+  begin
+    if edit_x0_from.Text = '' then
+      begin
+        showMessage('Pole "x0 Od" jest puste');
+        Result := false;
+      end
+    else
+      begin
+        x:= StrToFloat(edit_x0_from.Text);
+        Result := true;
+        showMessage(Concat('x0=',FloatToStr(x)));
+      end;
+  end
+else
+  begin
+    //arytmetyka przedziałowa
+  end;
+end;
+
+function TMain.checkFieldEps():Boolean;
+begin
+   if edit_eps.Text = '' then
+     begin
+       showMessage('Pole dokładność nie może być puste');
+       Result := false;
+     end
+   else
+     begin
+        eps := Power(10, StrToInt(edit_eps.Text));
+        Result := true;
+     end;
+end;
+
+function TMain.checkFieldMit():Boolean;
+begin
+  if edit_ma then
+
+end;
+
+//function Newton(x : Extended;  f : fx ; df : fx; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
+//begin
+//
+//
+//end;
+
+
+
+
+end.

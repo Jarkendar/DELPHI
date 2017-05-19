@@ -1,0 +1,148 @@
+object Main: TMain
+  Left = 0
+  Top = 0
+  Caption = 'Metoda Newtona'
+  ClientHeight = 314
+  ClientWidth = 526
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object label_aritmetic: TLabel
+    Left = 24
+    Top = 24
+    Width = 60
+    Height = 13
+    Caption = 'Arytmetyka:'
+  end
+  object label_input_x0: TLabel
+    Left = 216
+    Top = 24
+    Width = 66
+    Height = 13
+    Caption = 'Wej'#347'ciowe x0'
+  end
+  object label_function: TLabel
+    Left = 151
+    Top = 109
+    Width = 20
+    Height = 13
+    Caption = 'y=0'
+  end
+  object label_numberIteration: TLabel
+    Left = 24
+    Top = 152
+    Width = 61
+    Height = 13
+    Caption = 'Ilo'#347#263' iteracji:'
+  end
+  object label_score: TLabel
+    Left = 24
+    Top = 248
+    Width = 33
+    Height = 13
+    Caption = 'Wynik:'
+  end
+  object label_fault: TLabel
+    Left = 32
+    Top = 280
+    Width = 25
+    Height = 13
+    Caption = 'B'#322#261'd:'
+  end
+  object label_scoreOutput: TLabel
+    Left = 72
+    Top = 248
+    Width = 3
+    Height = 13
+  end
+  object label_faultOutput: TLabel
+    Left = 72
+    Top = 280
+    Width = 3
+    Height = 13
+  end
+  object label_from: TLabel
+    Left = 216
+    Top = 48
+    Width = 18
+    Height = 13
+    Caption = 'Od:'
+  end
+  object label_to: TLabel
+    Left = 367
+    Top = 46
+    Width = 17
+    Height = 13
+    Caption = 'Do:'
+  end
+  object radio_floatPoint: TRadioButton
+    Left = 32
+    Top = 43
+    Width = 113
+    Height = 17
+    Caption = 'zmiennopozycyjna'
+    Checked = True
+    TabOrder = 0
+    TabStop = True
+    OnClick = radioFloatClick
+  end
+  object radio_Section: TRadioButton
+    Left = 32
+    Top = 68
+    Width = 113
+    Height = 17
+    Caption = 'przedzia'#322'owa'
+    TabOrder = 1
+    OnClick = radioSectionClick
+  end
+  object edit_sectionFrom: TEdit
+    Left = 240
+    Top = 43
+    Width = 121
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 2
+    OnChange = rewriteNumber
+  end
+  object edit_sectionTo: TEdit
+    Left = 390
+    Top = 43
+    Width = 121
+    Height = 21
+    NumbersOnly = True
+    ReadOnly = True
+    TabOrder = 3
+  end
+  object button_function: TButton
+    Left = 24
+    Top = 104
+    Width = 121
+    Height = 25
+    Caption = 'Wprowad'#378' funkcj'#281
+    TabOrder = 4
+    OnClick = inputFunctionClick
+  end
+  object edit_numberIteration: TEdit
+    Left = 91
+    Top = 149
+    Width = 142
+    Height = 21
+    TabOrder = 5
+    Text = 'Wpisz liczb'#281' iteracji'
+    OnClick = clearEditNumerIteration
+  end
+  object button_start: TButton
+    Left = 24
+    Top = 192
+    Width = 209
+    Height = 25
+    Caption = 'START'
+    TabOrder = 6
+  end
+end

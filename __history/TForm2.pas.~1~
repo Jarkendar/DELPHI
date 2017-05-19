@@ -1,0 +1,27 @@
+unit TForm2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TPolynomianIn = class(TForm)
+    edit_polynomian: TEdit;
+    label_polynomianInfo: TLabel;
+    button_acceptPolynomian: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  PolynomianIn: TPolynomianIn;
+
+implementation
+
+{$R *.dfm}
+
+end.

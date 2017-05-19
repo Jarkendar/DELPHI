@@ -1,0 +1,38 @@
+object PolynomianIn: TPolynomianIn
+  Left = 0
+  Top = 0
+  Caption = 'Wprowadzanie wielomianu'
+  ClientHeight = 67
+  ClientWidth = 505
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object label_polynomianInfo: TLabel
+    Left = 24
+    Top = 27
+    Width = 144
+    Height = 13
+    Caption = 'Wprowad'#378' stopie'#324' wielomianu'
+  end
+  object edit_polynomian: TEdit
+    Left = 174
+    Top = 24
+    Width = 219
+    Height = 21
+    TabOrder = 0
+  end
+  object button_acceptPolynomian: TButton
+    Left = 408
+    Top = 22
+    Width = 75
+    Height = 25
+    Caption = 'Akceptuj'
+    TabOrder = 1
+  end
+end
