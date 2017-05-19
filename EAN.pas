@@ -40,6 +40,7 @@ type
     function checkFieldEps():Boolean;
     function checkFieldMit():Boolean;
     function checkFields(mode : Boolean) : Boolean;
+    procedure keyPress(Sender: TObject; var Key: Char);
 
 
 
@@ -80,6 +81,12 @@ implementation
 procedure TMain.clearEditNumberIteration(Sender: TObject);
 begin
   edit_eps.Clear;
+end;
+
+procedure TMain.keyPress(Sender: TObject; var Key: Char);  //w³asna obs³uga klawiszy
+begin
+   if (not ((ord(key) in [48..57]) or (ord(key) in [44..45]) or (ord(key) = 8))) then key := #0;
+
 end;
 
 procedure TMain.radioFloatClick(Sender: TObject);
@@ -125,7 +132,7 @@ begin
       //arytmetyka przedzia³owa
     end;
     it := 0;
-    x := 0;
+    x := 3.14;
     showMessage(Concat('wynik=',FloatToStr(x)));
     x := Newton (x, f, df, mit, eps, fatx , it, st);
     showMessage(Concat('it=',IntToStr(it)));
@@ -177,6 +184,14 @@ if mode then    //true zwyk³a, false przedzia³owa
   end
 else
   begin
+    if (edit_x0_from.Text = '') or (edit_x0_to.Text = '') then
+      begin
+        showMessage('Pola x0 : Od oraz Do nie mog¹ byæ puste!');
+        Result := false;
+      end;
+    //jeœli A mniejsze od B
+
+
     //arytmetyka przedzia³owa
   end;
 end;

@@ -146,18 +146,18 @@ object Main: TMain
     Top = 41
     Width = 121
     Height = 21
-    NumbersOnly = True
     TabOrder = 2
     OnChange = rewriteNumber
+    OnKeyPress = keyPress
   end
   object edit_x0_to: TEdit
     Left = 390
     Top = 41
     Width = 121
     Height = 21
-    NumbersOnly = True
     ReadOnly = True
     TabOrder = 3
+    OnKeyPress = keyPress
   end
   object edit_eps: TEdit
     Left = 122

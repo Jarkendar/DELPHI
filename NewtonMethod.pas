@@ -34,10 +34,53 @@ end;
 
 
 function Newton(x : Extended;  f : fx ; df : fx; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
+var
+  xit : Extended;  //x po i-tej iteracji
+  funkcja : Extended;
+  pochodna : Extended;
 begin
-    it := 1;
-    x:= 2;
-    Result := f(x);
+   it := 0;
+   xit := x+1;
+
+   if mit < 1 then   //mit jest za ma³y
+    begin
+      st := 1;
+    end;
+
+
+   while((it <= mit) and (abs(xit-x)>eps)) do
+    begin
+      //program
+      if it <> 0 then
+        begin
+          x:=xit;
+        end;
+
+     //obliczenie wartoœci funkcji i pochodnej
+      funkcja := f(x);
+      pochodna := df(x);
+
+      if pochodna = 0 then     //wartoœæ pochodnej dla x jest równa 0
+        begin
+          st := 2;
+        end;
+
+      xit := x*(funkcja/pochodna);
+
+
+      st:= 0;
+      fatx := abs(xit-x);
+      it := it + 1;
+
+    end;
+
+    if ((it = mit) and (abs(xit-x)>eps)) then    //nie osi¹gniet¹ wymaganej dok³adnoœci po mit iteracjach
+      begin
+        st := 3;
+      end;
+
+
+
 end;
 
 end.

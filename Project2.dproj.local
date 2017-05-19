@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899-12-30 00:00:00.000.130,=C:\Users\Jarek\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.966,C:\Users\Jarek\Desktop\DELPHI\EAN.pas=C:\Users\Jarek\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.966,C:\Users\Jarek\Desktop\DELPHI\EAN.dfm=C:\Users\Jarek\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.857,=C:\Users\Jarek\Desktop\DELPHI\Unit3.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.150,C:\Users\Jarek\Desktop\DELPHI\Unit3.pas=C:\Users\Jarek\Desktop\DELPHI\Types.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.063,=C:\Users\Jarek\Desktop\DELPHI\Unit2.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.574,C:\Users\Jarek\Desktop\DELPHI\Unit2.pas=C:\Users\Jarek\Desktop\DELPHI\NewtonMethod.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.966,C:\Users\Jarek\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Jarek\Desktop\DELPHI\EAN.dfm</Transaction>
     <Transaction>1899-12-30 00:00:00.000.825,=C:\Users\Jarek\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.111,C:\Users\Jarek\Desktop\DELPHI\TForm2.pas=C:\Users\Jarek\Desktop\DELPHI\Unit1.pas</Transaction>
     <Transaction>1899-12-30 00:00:00.000.201,C:\Users\Jarek\Desktop\DELPHI\TForm2.pas=</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.111,C:\Users\Jarek\Desktop\DELPHI\TForm2.dfm=C:\Users\Jarek\Desktop\DELPHI\Unit1.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.130,=C:\Users\Jarek\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.966,C:\Users\Jarek\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Jarek\Desktop\DELPHI\EAN.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.920,C:\Users\Jarek\Documents\RAD Studio\Projects\Project2.dproj=C:\Users\Jarek\Desktop\DELPHI\Project2.dproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.111,C:\Users\Jarek\Desktop\DELPHI\Unit1.pas=C:\Users\Jarek\Desktop\DELPHI\TForm2.pas</Transaction>
     <Transaction>1899-12-30 00:00:00.000.891,=C:\Users\Jarek\Desktop\DELPHI\Unit1.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.721,=C:\Users\Jarek\Desktop\DELPHI\Unit1.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.798,=C:\Users\Jarek\Desktop\DELPHI\Unit1.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.920,C:\Users\Jarek\Desktop\DELPHI\Project2.dproj=C:\Users\Jarek\Documents\RAD Studio\Projects\Project2.dproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.111,C:\Users\Jarek\Desktop\DELPHI\Unit1.dfm=C:\Users\Jarek\Desktop\DELPHI\TForm2.dfm</Transaction>
     <Transaction>1899-12-30 00:00:00.000.423,=C:\Users\Jarek\Desktop\DELPHI\OKCANCL2.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.850,=C:\Users\Jarek\Desktop\DELPHI\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.721,=C:\Users\Jarek\Desktop\DELPHI\Unit1.pas</Transaction>
     <Transaction>1899-12-30 00:00:00.000.845,=C:\Users\Jarek\Desktop\DELPHI\Unit1.pas</Transaction>
-    <Transaction>2017-05-19 11:39:19.063,=C:\Users\Jarek\Desktop\DELPHI\Unit2.pas</Transaction>
-    <Transaction>2017-05-19 11:40:40.857,=C:\Users\Jarek\Desktop\DELPHI\Unit3.pas</Transaction>
-    <Transaction>2017-05-19 11:41:28.150,C:\Users\Jarek\Desktop\DELPHI\Types.pas=C:\Users\Jarek\Desktop\DELPHI\Unit3.pas</Transaction>
-    <Transaction>2017-05-19 11:44:31.574,C:\Users\Jarek\Desktop\DELPHI\NewtonMethod.pas=C:\Users\Jarek\Desktop\DELPHI\Unit2.pas</Transaction>
-    <Transaction>2017-05-19 11:45:05.302,C:\Users\Jarek\Desktop\DELPHI\Unit1.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.302,C:\Users\Jarek\Desktop\DELPHI\Unit1.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.798,=C:\Users\Jarek\Desktop\DELPHI\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.850,=C:\Users\Jarek\Desktop\DELPHI\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>
