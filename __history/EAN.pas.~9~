@@ -1,0 +1,136 @@
+unit EAN;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TMain = class(TForm)
+    label_aritmetic: TLabel;
+    radio_floatPoint: TRadioButton;
+    radio_Section: TRadioButton;
+    label_input_x0: TLabel;
+    edit_x0_from: TEdit;
+    edit_x0_to: TEdit;
+    label_function: TLabel;
+    label_numberIteration: TLabel;
+    edit_numberIteration: TEdit;
+    button_start: TButton;
+    label_score: TLabel;
+    label_iteration: TLabel;
+    label_scoreOutput: TLabel;
+    label_faultOutput: TLabel;
+    label_from: TLabel;
+    label_to: TLabel;
+    Label3: TLabel;
+    label_blad: TLabel;
+    label_blad_number: TLabel;
+    label_stan: TLabel;
+    label_stan_number: TLabel;
+    edit_max_it: TEdit;
+    label_max_it: TLabel;
+    procedure clearEditNumerIteration(Sender: TObject);
+    procedure rewriteNumber(Sender: TObject);
+    procedure radioFloatClick(Sender: TObject);
+    procedure radioSectionClick(Sender: TObject);
+    procedure startClick(Sender: TObject);
+
+
+
+  private
+    { Private declarations }
+  public
+
+    { Public declarations }
+  end;
+
+type fx = function (x : Extended) : Extended;
+
+var
+  Main: TMain;
+  wielomian : array of Extended;
+  iterator : integer;
+  rownanieWielomianu : String;
+
+  x : Extended;  //pocz¹tkowe przybli¿enie
+  mit : integer; //maksymalna liczba iteracji
+  eps : Extended; //b³¹d wzglêdny
+  fatx : Extended; //wartoœæ funkcji dla
+  it : integer;
+  st :integer;
+  wynik : Extended;
+
+
+
+
+  function Newton(x : Extended;  f : fx ; df : fx; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
+
+implementation
+
+{$R *.dfm}
+
+//FUNKCJE
+function f (x : Extended) : Extended; far;
+begin
+f:=x*x-2;
+end;
+function df (x : Extended) : Extended; far;
+begin
+df:= 2*x;
+end;
+//**************************************************************
+procedure TMain.clearEditNumerIteration(Sender: TObject);
+begin
+  edit_numberIteration.Clear;
+end;
+
+procedure TMain.radioFloatClick(Sender: TObject);
+begin
+  edit_x0_To.ReadOnly := true;
+end;
+
+procedure TMain.radioSectionClick(Sender: TObject);
+begin
+  edit_x0_to.ReadOnly := false;
+end;
+
+procedure TMain.rewriteNumber(Sender: TObject);
+begin
+  if radio_floatPoint.Checked then
+    begin
+      edit_x0_to.Text := edit_x0_from.Text;
+    end;
+end;
+
+
+procedure TMain.startClick(Sender: TObject);
+begin
+    if radio_floatPoint.Checked then  //wybrano arytmetykê zwyk³¹
+      begin
+        if edit_x0_from.Text = '' then
+          begin
+            showMessage('Pole "x0 Od" jest puste');
+          end
+        else
+          begin
+            x:= StrToFloat(edit_x0_from.Text);
+            showMessage(Concat('x0=',FloatToStr(x)));
+          end;
+      end;
+
+    wynik := Newton (x, f, df, mit, eps, fatx , it, st);
+
+end;
+
+function Newton(x : Extended;  f : fx ; df : fx; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
+begin
+    it := 0;
+
+end;
+
+
+
+
+end.

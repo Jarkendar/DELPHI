@@ -1,0 +1,16 @@
+program Project2;
+
+uses
+  Vcl.Forms,
+  EAN in 'EAN.pas' {Main},
+  TForm2 in 'TForm2.pas' {PolynomianIn};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TMain, Main);
+  Application.CreateForm(TPolynomianIn, PolynomianIn);
+  Application.Run;
+end.

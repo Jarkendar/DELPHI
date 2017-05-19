@@ -1,0 +1,235 @@
+object Main: TMain
+  Left = 0
+  Top = 0
+  Caption = 'Metoda Newtona'
+  ClientHeight = 460
+  ClientWidth = 734
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object label_aritmetic: TLabel
+    Left = 24
+    Top = 24
+    Width = 60
+    Height = 13
+    Caption = 'Arytmetyka:'
+  end
+  object label_input_x0: TLabel
+    Left = 216
+    Top = 8
+    Width = 51
+    Height = 13
+    Caption = 'Wej'#347'ciowe'
+  end
+  object label_function: TLabel
+    Left = 151
+    Top = 245
+    Width = 44
+    Height = 13
+    Caption = 'y=x^2-2'
+  end
+  object label_numberIteration: TLabel
+    Left = 25
+    Top = 280
+    Width = 86
+    Height = 13
+    Caption = 'Dok'#322'adno'#347#263' 10^(-'
+  end
+  object label_score: TLabel
+    Left = 25
+    Top = 376
+    Width = 33
+    Height = 13
+    Caption = 'Wynik:'
+  end
+  object label_iteration: TLabel
+    Left = 24
+    Top = 408
+    Width = 64
+    Height = 13
+    Caption = 'Ilo'#347#263' iteracji: '
+  end
+  object label_scoreOutput: TLabel
+    Left = 73
+    Top = 376
+    Width = 3
+    Height = 13
+  end
+  object label_faultOutput: TLabel
+    Left = 73
+    Top = 408
+    Width = 3
+    Height = 13
+  end
+  object label_from: TLabel
+    Left = 216
+    Top = 46
+    Width = 18
+    Height = 13
+    Caption = 'Od:'
+  end
+  object label_to: TLabel
+    Left = 367
+    Top = 44
+    Width = 17
+    Height = 13
+    Caption = 'Do:'
+  end
+  object Label1: TLabel
+    Left = 215
+    Top = 88
+    Width = 15
+    Height = 13
+    Caption = '[A;'
+  end
+  object Label2: TLabel
+    Left = 216
+    Top = 140
+    Width = 14
+    Height = 13
+    Caption = ';B]'
+  end
+  object Label3: TLabel
+    Left = 158
+    Top = 280
+    Width = 4
+    Height = 13
+    Caption = ')'
+  end
+  object Label4: TLabel
+    Left = 216
+    Top = 107
+    Width = 18
+    Height = 13
+    Caption = 'Od:'
+  end
+  object Label5: TLabel
+    Left = 367
+    Top = 105
+    Width = 17
+    Height = 13
+    Caption = 'Do:'
+  end
+  object Label6: TLabel
+    Left = 216
+    Top = 159
+    Width = 18
+    Height = 13
+    Caption = 'Od:'
+  end
+  object Label7: TLabel
+    Left = 367
+    Top = 157
+    Width = 17
+    Height = 13
+    Caption = 'Do:'
+  end
+  object radio_floatPoint: TRadioButton
+    Left = 32
+    Top = 43
+    Width = 113
+    Height = 17
+    Caption = 'zmiennopozycyjna'
+    Checked = True
+    TabOrder = 0
+    TabStop = True
+    OnClick = radioFloatClick
+  end
+  object radio_Section: TRadioButton
+    Left = 32
+    Top = 68
+    Width = 113
+    Height = 17
+    Caption = 'przedzia'#322'owa'
+    TabOrder = 1
+    OnClick = radioSectionClick
+  end
+  object edit_x0_from: TEdit
+    Left = 240
+    Top = 41
+    Width = 121
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 2
+    OnChange = rewriteNumber
+  end
+  object edit_x0_to: TEdit
+    Left = 390
+    Top = 41
+    Width = 121
+    Height = 21
+    NumbersOnly = True
+    ReadOnly = True
+    TabOrder = 3
+  end
+  object button_function: TButton
+    Left = 24
+    Top = 240
+    Width = 121
+    Height = 25
+    Caption = 'Wprowad'#378' funkcj'#281
+    TabOrder = 4
+    OnClick = inputFunctionClick
+  end
+  object edit_numberIteration: TEdit
+    Left = 115
+    Top = 277
+    Width = 37
+    Height = 21
+    MaxLength = 2
+    NumbersOnly = True
+    TabOrder = 5
+    OnClick = clearEditNumerIteration
+  end
+  object button_start: TButton
+    Left = 25
+    Top = 320
+    Width = 209
+    Height = 25
+    Caption = 'START'
+    TabOrder = 6
+    OnClick = startClick
+  end
+  object edit_a_from: TEdit
+    Left = 240
+    Top = 102
+    Width = 121
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 7
+    OnChange = rewriteNumber
+  end
+  object edit_a_to: TEdit
+    Left = 390
+    Top = 102
+    Width = 121
+    Height = 21
+    NumbersOnly = True
+    ReadOnly = True
+    TabOrder = 8
+  end
+  object edit_b_from: TEdit
+    Left = 240
+    Top = 154
+    Width = 121
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 9
+    OnChange = rewriteNumber
+  end
+  object edit_b_to: TEdit
+    Left = 390
+    Top = 154
+    Width = 121
+    Height = 21
+    NumbersOnly = True
+    ReadOnly = True
+    TabOrder = 10
+  end
+end
