@@ -133,11 +133,10 @@ begin
     end;
     it := 0;
     x := 3.14;
-    showMessage(Concat('1it=',IntToStr(it)));
-    showMessage(Concat('1wynik=',FloatToStr(x)));
+    showMessage(Concat('wynik=',FloatToStr(x)));
     x := Newton (x, f, df, mit, eps, fatx , it, st);
-    showMessage(Concat('2it=',IntToStr(it)));
-    showMessage(Concat('2wynik=',FloatToStr(x)));
+    showMessage(Concat('it=',IntToStr(it)));
+    showMessage(Concat('wynik=',FloatToStr(x)));
 end;
 
 function TMain.checkFields(mode : Boolean) : Boolean;
@@ -206,9 +205,8 @@ begin
      end
    else
      begin
-        eps := Power(10, -(StrToInt(edit_eps.Text)));
+        eps := Power(10, StrToInt(edit_eps.Text));
         Result := true;
-        showMessage('eps =' + FloatToStr(eps));
      end;
 end;
 
@@ -223,7 +221,6 @@ begin
     begin
       mit := StrToInt(edit_max_it.Text);
       Result := true;
-      showMessage('mit =' + FloatToStr(mit));
     end;
 
 

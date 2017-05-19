@@ -57,9 +57,7 @@ begin
         end;
 
      //obliczenie wartoœci funkcji i pochodnej
-     showMessage('1');
       funkcja := f(x);
-      ShowMessage('2');
       pochodna := df(x);
 
       if pochodna = 0 then     //wartoœæ pochodnej dla x jest równa 0
@@ -82,7 +80,7 @@ begin
       end;
 
 
-      Result := xit;
+
 end;
 
 end.
