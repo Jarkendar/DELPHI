@@ -8,20 +8,27 @@ uses
 
 type fx = function (x : Extended) : Extended; far;
 
-function Newton(x : Extended; f : fx; df : fx;  mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
+function Newton(var x : Extended; f : fx; df : fx;  mit : Integer; var eps : Extended; var fatx : Extended; var it : Integer; var st : Integer) : Extended;
 
 implementation
 
-function Newton(x : Extended; f : fx; df : fx; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
+function Newton(var x : Extended; f : fx; df : fx;  mit : Integer; var eps : Extended; var fatx : Extended; var it : Integer; var st : Integer) : Extended;
 var
+  epstmp : Extended;
+  mark : Boolean;
   xit : Extended;  //x po i-tej iteracji
   funkcja : Extended;
   pochodna : Extended;
 begin
+    epstmp := eps;
+    mark := true;
    it := 0;
+   st := 0;
 //   xit := x+1;
    funkcja := 0;
    pochodna := 0;
+
+   showMessage('x='+FloatToStr(x)+';it='+IntToStr(it)+';eps='+FloatToStr(eps)+';fatx='+FloatToStr(fatx)+';st='+IntToStr(st));
 
    if mit < 1 then   //mit jest za ma³y
     begin
@@ -29,11 +36,12 @@ begin
       fatx := f(x);
       it := 0;
       eps := 0;
+      mark := false;
+      showMessage('x='+FloatToStr(x)+';it='+IntToStr(it)+';eps='+FloatToStr(eps)+';fatx='+FloatToStr(fatx)+';st='+IntToStr(st));
       Result := x;
     end;
 
-
-   while((it < mit) and (abs(xit-x)>eps)) do
+   while (it < mit) do
     begin
       //program
       if it <> 0 then
@@ -42,33 +50,49 @@ begin
         end;
 
      //obliczenie wartoœci funkcji i pochodnej
-     showMessage('1');
-     showMessage('x0fun='+FloatToStr(x));
       funkcja := f(x);
-      ShowMessage('2');
       pochodna := df(x);
 
       if pochodna = 0 then     //wartoœæ pochodnej dla x jest równa 0
         begin
           st := 2;
+          fatx := f(x);
+          eps := abs(xit-x);
+          mark := false;
+          showMessage('2x='+FloatToStr(x)+';it='+IntToStr(it)+';eps='+FloatToStr(eps)+';fatx='+FloatToStr(fatx)+';st='+IntToStr(st));
+          Result := x;
+          break;
         end;
 
-      xit := x*(funkcja/pochodna);
+      xit := x-(funkcja/pochodna);
 
-
-      st:= 0;
       fatx := abs(xit-x);
       it := it + 1;
 
+      if (abs(xit-x)<epstmp) then
+        begin
+          break;
+        end;
     end;
 
     if ((it = mit) and (abs(xit-x)>eps)) then    //nie osi¹gniet¹ wymaganej dok³adnoœci po mit iteracjach
       begin
         st := 3;
+        fatx := f(xit);
+        eps := abs(xit-x);
+        mark := false;
+        showMessage('x='+FloatToStr(xit)+';it='+IntToStr(it)+';eps='+FloatToStr(eps)+'\n;fatx='+FloatToStr(fatx)+';st='+IntToStr(st));
+        Result := xit;
+        showMessage('Koniec');
       end;
 
-
-      Result := xit;
+    if mark then
+      begin
+        fatx := f(x);
+        eps := abs(xit-x);
+        showMessage('x='+FloatToStr(xit)+';it='+IntToStr(it)+';eps='+FloatToStr(eps)+';fatx='+FloatToStr(fatx)+';st='+IntToStr(st));
+        Result := xit;
+      end;
 end;
 
 end.

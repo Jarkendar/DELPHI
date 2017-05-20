@@ -20,17 +20,17 @@ type
     button_start: TButton;
     label_score: TLabel;
     label_iteration: TLabel;
-    label_scoreOutput: TLabel;
-    label_faultOutput: TLabel;
+    label_x: TLabel;
+    label_it: TLabel;
     label_from: TLabel;
     label_to: TLabel;
     Label3: TLabel;
-    label_blad: TLabel;
-    label_blad_number: TLabel;
     label_stan: TLabel;
-    label_stan_number: TLabel;
+    label_st: TLabel;
     edit_max_it: TEdit;
     label_max_it: TLabel;
+    Label1: TLabel;
+    label_fatx: TLabel;
     procedure clearEditNumberIteration(Sender: TObject);
     procedure rewriteNumber(Sender: TObject);
     procedure radioFloatClick(Sender: TObject);
@@ -42,7 +42,7 @@ type
     function checkFields(mode : Boolean) : Boolean;
     procedure keyPress(Sender: TObject; var Key: Char);
 
-
+type fx = function (x : Extended) : Extended; far;
 
   private
     { Private declarations }
@@ -58,7 +58,6 @@ var
   rownanieWielomianu : String;
 
   x : Extended;  //pocz¹tkowe przybli¿enie
-  f, df : fx;
   mit : Integer; //maksymalna liczba iteracji
   eps : Extended; //b³¹d wzglêdny
   fatx : Extended; //wartoœæ funkcji dla
@@ -76,7 +75,25 @@ implementation
 {$R *.dfm}
 
 //FUNKCJE
+function f (x : Extended) : Extended; far;
+begin
+  Result :=x*x-2;
+end;
+function df (x : Extended) : Extended; far;
+begin
+  df := 2*x;
+end;
 
+//function f (x : Extended) : Extended; far;
+//var s : Extended;
+//begin
+//s:=Sin(x);
+//f:=s*(s+0.5)-0.5;
+//end;
+//function df (x : Extended) : Extended; far;
+//begin
+//df:=Sin(2*x) + 0.5*Cos(x);
+//end;
 //**************************************************************
 procedure TMain.clearEditNumberIteration(Sender: TObject);
 begin
@@ -123,21 +140,31 @@ begin
       begin
         if checkFields(true) then
           begin
-            showMessage('Dane siê zgadzaj¹');
             //odpal funkcjê
+            x := Newton (x, f, df, mit, eps, fatx , it, st);
+            if st = 2 then
+              begin
+                label_x.Caption := '';
+                label_fatx.Caption := '';
+                label_it.Caption := '';
+                label_st.Caption := IntToStr(st);
+              end
+            else
+              begin
+                label_x.Caption := FloatToStr(x);
+                label_fatx.Caption := FloatToStr(fatx);
+                label_it.Caption := IntToStr(it);
+                label_st.Caption := IntToStr(st);
+              end;
+
+
           end;
       end
     else
     begin
       //arytmetyka przedzia³owa
     end;
-    it := 0;
-    x := 3.14;
-    showMessage(Concat('1it=',IntToStr(it)));
-    showMessage(Concat('1wynik=',FloatToStr(x)));
-    x := Newton (x, f, df, mit, eps, fatx , it, st);
-    showMessage(Concat('2it=',IntToStr(it)));
-    showMessage(Concat('2wynik=',FloatToStr(x)));
+
 end;
 
 function TMain.checkFields(mode : Boolean) : Boolean;
@@ -151,17 +178,14 @@ begin
   checkEps := false;
         if checkFieldX0(mode) then
         begin
-          showMessage('x0 siê zgadza');
           checkX0 := true;
         end;
         if checkFieldEps() then
           begin
-            showMessage('Eps siê zgadza');
             checkEps := true;
           end;
         if checkFieldMit() then
           begin
-            showMessage('Mit siê zgadza');
             checkMit := true;
           end;
         Result := checkX0 and checkEps and checkMit;
@@ -180,7 +204,6 @@ if mode then    //true zwyk³a, false przedzia³owa
       begin
         x:= StrToFloat(edit_x0_from.Text);
         Result := true;
-        showMessage(Concat('x0=',FloatToStr(x)));
       end;
   end
 else
@@ -208,7 +231,6 @@ begin
      begin
         eps := Power(10, -(StrToInt(edit_eps.Text)));
         Result := true;
-        showMessage('eps =' + FloatToStr(eps));
      end;
 end;
 
@@ -223,7 +245,6 @@ begin
     begin
       mit := StrToInt(edit_max_it.Text);
       Result := true;
-      showMessage('mit =' + FloatToStr(mit));
     end;
 
 

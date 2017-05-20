@@ -2,7 +2,7 @@ object Main: TMain
   Left = 0
   Top = 0
   Caption = 'Metoda Newtona'
-  ClientHeight = 364
+  ClientHeight = 344
   ClientWidth = 734
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -44,27 +44,27 @@ object Main: TMain
   object label_score: TLabel
     Left = 32
     Top = 224
-    Width = 33
+    Width = 10
     Height = 13
-    Caption = 'Wynik:'
+    Caption = 'x:'
   end
   object label_iteration: TLabel
     Left = 32
-    Top = 256
+    Top = 280
     Width = 64
     Height = 13
     Caption = 'Ilo'#347#263' iteracji: '
   end
-  object label_scoreOutput: TLabel
-    Left = 80
+  object label_x: TLabel
+    Left = 102
     Top = 224
-    Width = 3
+    Width = 163
     Height = 13
   end
-  object label_faultOutput: TLabel
-    Left = 80
-    Top = 256
-    Width = 3
+  object label_it: TLabel
+    Left = 102
+    Top = 280
+    Width = 61
     Height = 13
   end
   object label_from: TLabel
@@ -88,30 +88,17 @@ object Main: TMain
     Height = 13
     Caption = ')'
   end
-  object label_blad: TLabel
-    Left = 32
-    Top = 288
-    Width = 28
-    Height = 13
-    Caption = 'B'#322#261'd: '
-  end
-  object label_blad_number: TLabel
-    Left = 66
-    Top = 288
-    Width = 3
-    Height = 13
-  end
   object label_stan: TLabel
     Left = 32
-    Top = 320
+    Top = 312
     Width = 29
     Height = 13
     Caption = 'Stan: '
   end
-  object label_stan_number: TLabel
-    Left = 67
-    Top = 320
-    Width = 3
+  object label_st: TLabel
+    Left = 102
+    Top = 312
+    Width = 126
     Height = 13
   end
   object label_max_it: TLabel
@@ -120,6 +107,19 @@ object Main: TMain
     Width = 122
     Height = 13
     Caption = 'Maksymalna liczba iteracji'
+  end
+  object Label1: TLabel
+    Left = 32
+    Top = 248
+    Width = 29
+    Height = 13
+    Caption = 'Fatx: '
+  end
+  object label_fatx: TLabel
+    Left = 102
+    Top = 248
+    Width = 347
+    Height = 13
   end
   object radio_floatPoint: TRadioButton
     Left = 32
