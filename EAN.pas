@@ -14,7 +14,6 @@ type
     label_input_x0: TLabel;
     edit_x0_from: TEdit;
     edit_x0_to: TEdit;
-    label_function: TLabel;
     label_numberIteration: TLabel;
     edit_eps: TEdit;
     button_start: TButton;
@@ -31,6 +30,8 @@ type
     label_max_it: TLabel;
     Label1: TLabel;
     label_fatx: TLabel;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     procedure clearEditNumberIteration(Sender: TObject);
     procedure rewriteNumber(Sender: TObject);
     procedure radioFloatClick(Sender: TObject);
@@ -41,6 +42,8 @@ type
     function checkFieldMit():Boolean;
     function checkFields(mode : Boolean) : Boolean;
     procedure keyPress(Sender: TObject; var Key: Char);
+    procedure checkClick1(Sender: TObject);
+    procedure checkClick2(Sender: TObject);
 
 type fx = function (x : Extended) : Extended; far;
 
@@ -65,35 +68,30 @@ var
   st : Integer;
   wynik : Extended;
 
-
-
-
-//  function Newton(x : Extended;  f : fx ; df : fx; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
-
 implementation
 
 {$R *.dfm}
 
-//FUNKCJE
-function f (x : Extended) : Extended; far;
+//FUNKCJE ***********************************
+function f1 (x : Extended) : Extended; far;
 begin
-  Result :=x*x-2;
+  f1 :=x*x-2;
 end;
-function df (x : Extended) : Extended; far;
+function df1 (x : Extended) : Extended; far;
 begin
-  df := 2*x;
+  df1 := 2*x;
 end;
 
-//function f (x : Extended) : Extended; far;
-//var s : Extended;
-//begin
-//s:=Sin(x);
-//f:=s*(s+0.5)-0.5;
-//end;
-//function df (x : Extended) : Extended; far;
-//begin
-//df:=Sin(2*x) + 0.5*Cos(x);
-//end;
+function f2 (x : Extended) : Extended; far;
+  var s : Extended;
+  begin
+    s:=Sin(x);
+    f2:=s*(s+0.5)-0.5;
+end;
+function df2 (x : Extended) : Extended; far;
+  begin
+    df2:=Sin(2*x) + 0.5*Cos(x);
+  end;
 //**************************************************************
 procedure TMain.clearEditNumberIteration(Sender: TObject);
 begin
@@ -124,11 +122,6 @@ begin
     end;
 end;
 
-
-
-
-
-
 procedure TMain.startClick(Sender: TObject);
 var
   checkX0 : Boolean;
@@ -141,7 +134,15 @@ begin
         if checkFields(true) then
           begin
             //odpal funkcjê
-            x := Newton (x, f, df, mit, eps, fatx , it, st);
+            if CheckBox1.Checked then
+              begin
+                x := Newton (x, f1, df1, mit, eps, fatx , it, st);
+              end;
+            if CheckBox2.Checked then
+              begin
+                x := Newton (x, f2, df2, mit, eps, fatx , it, st);
+              end;
+
             if st = 2 then
               begin
                 label_x.Caption := '';
@@ -218,6 +219,34 @@ else
 
     //arytmetyka przedzia³owa
   end;
+end;
+
+procedure TMain.checkClick1(Sender: TObject);
+begin
+  if CheckBox1.Checked then
+    begin
+      CheckBox1.Checked := true;
+      CheckBox2.Checked := false;
+    end
+  else
+    begin
+      CheckBox1.Checked := false;
+      CheckBox2.Checked := true;
+    end;
+end;
+
+procedure TMain.checkClick2(Sender: TObject);
+begin
+  if CheckBox2.Checked then
+    begin
+      CheckBox2.Checked := true;
+      CheckBox1.Checked := false;
+    end
+  else
+    begin
+      CheckBox2.Checked := false;
+      CheckBox1.Checked := true;
+    end;
 end;
 
 function TMain.checkFieldEps():Boolean;
