@@ -35,7 +35,7 @@ object Main: TMain
     Caption = 'y=x^2-2'
   end
   object label_numberIteration: TLabel
-    Left = 32
+    Left = 30
     Top = 128
     Width = 86
     Height = 13
@@ -115,8 +115,8 @@ object Main: TMain
     Height = 13
   end
   object label_max_it: TLabel
-    Left = 200
-    Top = 128
+    Left = 32
+    Top = 160
     Width = 122
     Height = 13
     Caption = 'Maksymalna liczba iteracji'
@@ -179,8 +179,8 @@ object Main: TMain
     OnClick = startClick
   end
   object edit_max_it: TEdit
-    Left = 349
-    Top = 125
+    Left = 181
+    Top = 157
     Width = 119
     Height = 21
     NumbersOnly = True
