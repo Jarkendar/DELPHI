@@ -18,6 +18,8 @@ var
   xit : interval;  //x po i-tej iteracji
   funkcja : interval;
   pochodna : interval;
+  stanFunkcji : Integer;
+  maxInterval : interval;
 begin
     mark := true;
    it := 0;
@@ -29,7 +31,7 @@ begin
    if mit < 1 then   //mit jest za ma³y
     begin
       st := 1;
-      fatx := f(x);
+      fatx := f(x, stanFunkcji);
       it := 0;
       mark := false;
       Result := x;
@@ -39,16 +41,30 @@ begin
     begin
       if it <> 0 then
         begin
-          x:=xit;
+          x.a:=xit.a;
+          x.b:=xit.b;
         end;
      //obliczenie wartoœci funkcji i pochodnej
-      funkcja := f(x);
-      pochodna := df(x);
+      funkcja := f(x,stanFunkcji);
+      if stanFunkcji <> 0 then
+        begin
+          st:= 4;
+          showMessage('B³¹d funkcji');
+          break;
+        end;
+      pochodna := df(x, stanFunkcji);
+      if stanFunkcji <> 0 then
+        begin
+          st := 5;
+          showMessage('B³¹d pochodnej');
+          break
+        end;
+        
 
-      if pochodna = 0 then     //wartoœæ pochodnej dla x jest równa 0
+      if containtZero(pochodna) then     //wartoœæ przedzia³u pochodnej dla x zawiera 0
         begin
           st := 2;
-          fatx := f(x);
+          fatx := f(x, stanFunkcji);
           mark := false;
           Result := x;
           break;
@@ -58,25 +74,38 @@ begin
 
       it := it + 1;
 
-      if ((abs(xit-x)/Max(xit,x))<eps) then
+      if xit>x then maxInterval := xit
+      else maxInterval := x;
+
+      if containtZero(maxInterval) then
+        begin
+          st := 2;
+          fatx := f(x, stanFunkcji);
+          mark := false;
+          showMessage('Przy obliczaniu b³êdu mog³o dojœæ do dzielenia przez zero');
+          Result := x;
+          break;
+        end;
+      
+      if ((iabs(xit-x)/maxInterval)<eps) then
         begin
           break;
         end;
     end;
 
-    if ((it = mit) and (abs(xit-x)>eps)) then    //nie osi¹gniet¹ wymaganej dok³adnoœci po mit iteracjach
+    if ((it = mit) and ((iabs(xit-x)/maxInterval)>eps)) then    //nie osi¹gniet¹ wymaganej dok³adnoœci po mit iteracjach
       begin
         st := 3;
-        fatx := f(xit);
+        fatx := f(xit, stanFunkcji);
         mark := false;
         Result := xit;
       end;
 
     if mark then
       begin
-        fatx := f(x);
-        eps := abs(xit-x);
+        fatx := f(x, stanFunkcji);
         Result := xit;
       end;
 end;
 
+end.

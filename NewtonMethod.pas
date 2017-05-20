@@ -64,7 +64,7 @@ begin
         end;
     end;
 
-    if ((it = mit) and (abs(xit-x)>eps)) then    //nie osi¹gniet¹ wymaganej dok³adnoœci po mit iteracjach
+    if ((it = mit) and ((abs(xit-x)/Max(xit,x)>eps))) then    //nie osi¹gniet¹ wymaganej dok³adnoœci po mit iteracjach
       begin
         st := 3;
         fatx := f(xit);
@@ -75,7 +75,6 @@ begin
     if mark then
       begin
         fatx := f(x);
-        eps := abs(xit-x);
         Result := xit;
       end;
 end;
