@@ -2,7 +2,7 @@ object Main: TMain
   Left = 0
   Top = 0
   Caption = 'Metoda Newtona'
-  ClientHeight = 364
+  ClientHeight = 492
   ClientWidth = 734
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -27,43 +27,36 @@ object Main: TMain
     Height = 13
     Caption = 'x0'
   end
-  object label_function: TLabel
-    Left = 32
-    Top = 101
-    Width = 44
-    Height = 13
-    Caption = 'y=x^2-2'
-  end
   object label_numberIteration: TLabel
-    Left = 32
-    Top = 128
+    Left = 30
+    Top = 160
     Width = 86
     Height = 13
     Caption = 'Dok'#322'adno'#347#263' 10^(-'
   end
   object label_score: TLabel
     Left = 32
-    Top = 224
-    Width = 33
+    Top = 256
+    Width = 10
     Height = 13
-    Caption = 'Wynik:'
+    Caption = 'x:'
   end
   object label_iteration: TLabel
     Left = 32
-    Top = 256
+    Top = 312
     Width = 64
     Height = 13
     Caption = 'Ilo'#347#263' iteracji: '
   end
-  object label_scoreOutput: TLabel
-    Left = 80
-    Top = 224
+  object label_x: TLabel
+    Left = 102
+    Top = 256
     Width = 3
     Height = 13
   end
-  object label_faultOutput: TLabel
-    Left = 80
-    Top = 256
+  object label_it: TLabel
+    Left = 102
+    Top = 312
     Width = 3
     Height = 13
   end
@@ -83,43 +76,43 @@ object Main: TMain
   end
   object Label3: TLabel
     Left = 165
-    Top = 128
+    Top = 160
     Width = 4
     Height = 13
     Caption = ')'
   end
-  object label_blad: TLabel
-    Left = 32
-    Top = 288
-    Width = 28
-    Height = 13
-    Caption = 'B'#322#261'd: '
-  end
-  object label_blad_number: TLabel
-    Left = 66
-    Top = 288
-    Width = 3
-    Height = 13
-  end
   object label_stan: TLabel
     Left = 32
-    Top = 320
+    Top = 344
     Width = 29
     Height = 13
     Caption = 'Stan: '
   end
-  object label_stan_number: TLabel
-    Left = 67
-    Top = 320
+  object label_st: TLabel
+    Left = 102
+    Top = 344
     Width = 3
     Height = 13
   end
   object label_max_it: TLabel
-    Left = 200
-    Top = 128
+    Left = 32
+    Top = 192
     Width = 122
     Height = 13
     Caption = 'Maksymalna liczba iteracji'
+  end
+  object Label1: TLabel
+    Left = 32
+    Top = 280
+    Width = 29
+    Height = 13
+    Caption = 'Fatx: '
+  end
+  object label_fatx: TLabel
+    Left = 102
+    Top = 280
+    Width = 3
+    Height = 13
   end
   object radio_floatPoint: TRadioButton
     Left = 32
@@ -146,22 +139,22 @@ object Main: TMain
     Top = 41
     Width = 121
     Height = 21
-    NumbersOnly = True
     TabOrder = 2
     OnChange = rewriteNumber
+    OnKeyPress = keyPress
   end
   object edit_x0_to: TEdit
     Left = 390
     Top = 41
     Width = 121
     Height = 21
-    NumbersOnly = True
     ReadOnly = True
     TabOrder = 3
+    OnKeyPress = keyPress
   end
   object edit_eps: TEdit
     Left = 122
-    Top = 125
+    Top = 157
     Width = 37
     Height = 21
     MaxLength = 2
@@ -171,7 +164,7 @@ object Main: TMain
   end
   object button_start: TButton
     Left = 32
-    Top = 193
+    Top = 225
     Width = 209
     Height = 25
     Caption = 'START'
@@ -179,11 +172,31 @@ object Main: TMain
     OnClick = startClick
   end
   object edit_max_it: TEdit
-    Left = 349
-    Top = 125
+    Left = 181
+    Top = 189
     Width = 119
     Height = 21
     NumbersOnly = True
     TabOrder = 6
+  end
+  object CheckBox1: TCheckBox
+    Left = 30
+    Top = 112
+    Width = 97
+    Height = 17
+    Caption = 'y=x^2-2'
+    Checked = True
+    State = cbChecked
+    TabOrder = 7
+    OnClick = checkClick1
+  end
+  object CheckBox2: TCheckBox
+    Left = 165
+    Top = 112
+    Width = 196
+    Height = 17
+    Caption = 'y=sin^2(x)+0,5sin(x)-0,5'
+    TabOrder = 8
+    OnClick = checkClick2
   end
 end

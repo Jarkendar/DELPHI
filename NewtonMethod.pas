@@ -4,40 +4,79 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, Menus, ComCtrls, StdCtrls, Grids, Clipbrd;
+  Dialogs, ExtCtrls, Menus, ComCtrls, StdCtrls, Grids, Clipbrd, IntervalArithmetic32and64, Math;
 
-type fx = function (x : Extended) : Extended;
+type fx = function (x : Extended) : Extended; far;
 
-function Newton(x : Extended;  f : fx ; df : fx ; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
+function Newton(var x : Extended; f : fx; df : fx;  mit : Integer; eps : Extended; var fatx : Extended; var it : Integer; var st : Integer) : Extended;
 
 implementation
 
-function f (x : Extended) : Extended;
+function Newton(var x : Extended; f : fx; df : fx;  mit : Integer;  eps : Extended; var fatx : Extended; var it : Integer; var st : Integer) : Extended;
+var
+  mark : Boolean;
+  xit : Extended;  //x po i-tej iteracji
+  funkcja : Extended;
+  pochodna : Extended;
 begin
-  Result :=x*x-2;
-end;
-function df (x : Extended) : Extended;
-begin
-  Result := 2*x;
-end;
+    mark := true;
+   it := 0;
+   st := 0;
+//   xit := x+1;
+   funkcja := 0;
+   pochodna := 0;
 
-//function f (x : Extended) : Extended; far;
-//var s : Extended;
-//begin
-//s:=Sin(x);
-//f:=s*(s+0.5)-0.5;
-//end;
-//function df (x : Extended) : Extended; far;
-//begin
-//df:=Sin(2*x) + 0.5*Cos(x);
-//end;
+   if mit < 1 then   //mit jest za ma³y
+    begin
+      st := 1;
+      fatx := f(x);
+      it := 0;
+      mark := false;
+      Result := x;
+    end;
 
+   while (it < mit) do
+    begin
+      if it <> 0 then
+        begin
+          x:=xit;
+        end;
+     //obliczenie wartoœci funkcji i pochodnej
+      funkcja := f(x);
+      pochodna := df(x);
 
-function Newton(x : Extended;  f : fx ; df : fx; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
-begin
-    it := 1;
-    x:= 2;
-    Result := f(x);
+      if pochodna = 0 then     //wartoœæ pochodnej dla x jest równa 0
+        begin
+          st := 2;
+          fatx := f(x);
+          mark := false;
+          Result := x;
+          break;
+        end;
+
+      xit := x-(funkcja/pochodna);
+
+      it := it + 1;
+
+      if ((abs(xit-x)/Max(xit,x))<eps) then
+        begin
+          break;
+        end;
+    end;
+
+    if ((it = mit) and ((abs(xit-x)/Max(xit,x)>eps))) then    //nie osi¹gniet¹ wymaganej dok³adnoœci po mit iteracjach
+      begin
+        st := 3;
+        fatx := f(xit);
+        mark := false;
+        Result := xit;
+      end;
+
+    if mark then
+      begin
+        fatx := f(x);
+        Result := xit;
+      end;
 end;
 
 end.
