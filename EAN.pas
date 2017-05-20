@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, NewtonMethod, Types, Math;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, NewtonMethod, Types, Math, IntervalArithmetic32and64;
 
 type
   TMain = class(TForm)
@@ -38,7 +38,7 @@ type
     procedure radioSectionClick(Sender: TObject);
     procedure startClick(Sender: TObject);
     function checkFieldX0(mode : Boolean): Boolean;
-    function checkFieldEps():Boolean;
+    function checkFieldEps(mode : Boolean):Boolean;
     function checkFieldMit():Boolean;
     function checkFields(mode : Boolean) : Boolean;
     procedure keyPress(Sender: TObject; var Key: Char);
@@ -46,6 +46,7 @@ type
     procedure checkClick2(Sender: TObject);
 
 type fx = function (x : Extended) : Extended; far;
+type fxinterval = function (x : Interval; var st : Integer) : Extended; far;
 
   private
     { Private declarations }
@@ -61,12 +62,14 @@ var
   rownanieWielomianu : String;
 
   x : Extended;  //pocz¹tkowe przybli¿enie
+  intervalx : interval;
   mit : Integer; //maksymalna liczba iteracji
   eps : Extended; //b³¹d wzglêdny
+  intervaleps : interval;
   fatx : Extended; //wartoœæ funkcji dla
+  intervalfatx : interval;
   it : Integer;
   st : Integer;
-  wynik : Extended;
 
 implementation
 
@@ -92,6 +95,34 @@ function df2 (x : Extended) : Extended; far;
   begin
     df2:=Sin(2*x) + 0.5*Cos(x);
   end;
+
+//FUNKCJE PRZEDZIA£OWE
+function if1 (x : interval; var st :Integer) : interval; far;
+begin
+  if1 :=x*x-2;
+  st := 0;
+end;
+function idf1 (x : interval; var st : Integer) : interval; far;
+begin
+  idf1 := 2*x;
+  st := 0;
+end;
+
+function if2 (x : interval; var st : Integer) : interval; far;
+  var
+    s : interval;
+  begin
+    s:=iSin(x,st);
+    if2:=s*(s+0.5)-0.5;
+end;
+function idf2 (x : interval; var st : Integer) : interval; far;
+var
+  st2 : Integer;
+  begin
+    idf2:=iSin(2*x, st) + 0.5*iCos(x, st2);
+    if st2 <> 0 then st := st2;
+  end;
+
 //**************************************************************
 procedure TMain.clearEditNumberIteration(Sender: TObject);
 begin
@@ -123,10 +154,6 @@ begin
 end;
 
 procedure TMain.startClick(Sender: TObject);
-var
-  checkX0 : Boolean;
-  checkMit : Boolean;
-  checkEps : Boolean;
 begin
 
     if radio_floatPoint.Checked then  //wybrano arytmetykê zwyk³¹
@@ -142,7 +169,6 @@ begin
               begin
                 x := Newton (x, f2, df2, mit, eps, fatx , it, st);
               end;
-
             if st = 2 then
               begin
                 label_x.Caption := '';
@@ -157,12 +183,11 @@ begin
                 label_it.Caption := IntToStr(it);
                 label_st.Caption := IntToStr(st);
               end;
-
-
           end;
       end
     else
     begin
+
       //arytmetyka przedzia³owa
     end;
 
@@ -181,7 +206,7 @@ begin
         begin
           checkX0 := true;
         end;
-        if checkFieldEps() then
+        if checkFieldEps(mode) then
           begin
             checkEps := true;
           end;
@@ -207,7 +232,7 @@ if mode then    //true zwyk³a, false przedzia³owa
         Result := true;
       end;
   end
-else
+else  //arytmetyka przedzia³owa
   begin
     if (edit_x0_from.Text = '') or (edit_x0_to.Text = '') then
       begin
@@ -249,18 +274,25 @@ begin
     end;
 end;
 
-function TMain.checkFieldEps():Boolean;
+function TMain.checkFieldEps(mode : Boolean):Boolean;
 begin
-   if edit_eps.Text = '' then
-     begin
-       showMessage('Pole dok³adnoœæ nie mo¿e byæ puste!');
-       Result := false;
-     end
-   else
-     begin
-        eps := Power(10, -(StrToInt(edit_eps.Text)));
-        Result := true;
-     end;
+  if mode then
+   begin
+     if edit_eps.Text = '' then
+       begin
+         showMessage('Pole dok³adnoœæ nie mo¿e byæ puste!');
+         Result := false;
+       end
+     else
+       begin
+          eps := Power(10, -(StrToInt(edit_eps.Text)));
+          Result := true;
+       end;
+   end
+  else
+    begin
+      //arytmetyka przedzia³owa
+    end;
 end;
 
 function TMain.checkFieldMit():Boolean;
@@ -275,17 +307,6 @@ begin
       mit := StrToInt(edit_max_it.Text);
       Result := true;
     end;
-
-
 end;
-
-//function Newton(x : Extended;  f : fx ; df : fx; mit : Integer; eps : Extended; fatx : Extended; it : Integer; st : Integer) : Extended;
-//begin
-//
-//
-//end;
-
-
-
 
 end.
