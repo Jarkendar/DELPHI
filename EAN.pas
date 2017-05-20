@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, NewtonMethod, Types, Math, IntervalArithmetic32and64;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, NewtonMethod, NewtonIntervalMethod, Types, Math, IntervalArithmetic32and64;
 
 type
   TMain = class(TForm)
@@ -46,7 +46,7 @@ type
     procedure checkClick2(Sender: TObject);
 
 type fx = function (x : Extended) : Extended; far;
-type fxinterval = function (x : Interval; var st : Integer) : Extended; far;
+type fxinterval = function (x : interval; var st : Integer) : interval; far;
 
   private
     { Private declarations }
@@ -70,6 +70,8 @@ var
   intervalfatx : interval;
   it : Integer;
   st : Integer;
+  lewyKoniec : String;
+  prawyKoniec : String;
 
 implementation
 
@@ -135,6 +137,34 @@ begin
 
 end;
 
+procedure TMain.checkClick1(Sender: TObject);
+begin
+  if CheckBox1.Checked then
+    begin
+      CheckBox1.Checked := true;
+      CheckBox2.Checked := false;
+    end
+  else
+    begin
+      CheckBox1.Checked := false;
+      CheckBox2.Checked := true;
+    end;
+end;
+
+procedure TMain.checkClick2(Sender: TObject);
+begin
+  if CheckBox2.Checked then
+    begin
+      CheckBox2.Checked := true;
+      CheckBox1.Checked := false;
+    end
+  else
+    begin
+      CheckBox2.Checked := false;
+      CheckBox1.Checked := true;
+    end;
+end;
+
 procedure TMain.radioFloatClick(Sender: TObject);
 begin
   edit_x0_To.ReadOnly := true;
@@ -177,7 +207,7 @@ begin
                 label_st.Caption := IntToStr(st);
               end
             else
-              begin
+              begin                  
                 label_x.Caption := FloatToStr(x);
                 label_fatx.Caption := FloatToStr(fatx);
                 label_it.Caption := IntToStr(it);
@@ -185,12 +215,37 @@ begin
               end;
           end;
       end
-    else
-    begin
-
-      //arytmetyka przedzia³owa
-    end;
-
+    else //arytmetyka przedzia³owa
+      begin
+       if checkFields(false) then
+          begin
+            //odpal funkcjê
+            if CheckBox1.Checked then
+              begin
+                intervalx := NewtonInterval (intervalx, if1, idf1, mit, intervaleps, intervalfatx , it, st);
+              end;
+            if CheckBox2.Checked then
+              begin
+                intervalx := NewtonInterval (intervalx, if2, idf2, mit, intervaleps, intervalfatx , it, st);
+              end;
+            if st = 2 then
+              begin
+                label_x.Caption := '';
+                label_fatx.Caption := '';
+                label_it.Caption := '';
+                label_st.Caption := IntToStr(st);
+              end
+            else
+              begin
+                iends_to_strings(intervalx, lewyKoniec, prawyKoniec);
+                label_x.Caption := '['+lewyKoniec+';'+prawyKoniec+']';
+                iends_to_strings(intervalfatx, lewyKoniec, prawyKoniec);
+                label_fatx.Caption := '['+lewyKoniec+';'+prawyKoniec+']';
+                label_it.Caption := IntToStr(it);
+                label_st.Caption := IntToStr(st);
+              end;
+          end;
+      end;
 end;
 
 function TMain.checkFields(mode : Boolean) : Boolean;
@@ -238,40 +293,24 @@ else  //arytmetyka przedzia³owa
       begin
         showMessage('Pola x0 : Od oraz Do nie mog¹ byæ puste!');
         Result := false;
-      end;
-    //jeœli A mniejsze od B
+      end
+    else
+      begin
+        //jeœli A mniejsze od B
+        intervalx.a := left_read(edit_x0_from.Text);
+        intervalx.b := right_read(edit_x0_to.Text);
 
-
-    //arytmetyka przedzia³owa
+        if intervalx.a > intervalx.b then
+          begin
+             showMessage('Pocz¹tek przedzia³u nie mo¿e byæ wiêkszy od jego koñca!');
+             Result := false;
+          end
+        else
+          begin
+            Result := true;
+          end;
+    end;
   end;
-end;
-
-procedure TMain.checkClick1(Sender: TObject);
-begin
-  if CheckBox1.Checked then
-    begin
-      CheckBox1.Checked := true;
-      CheckBox2.Checked := false;
-    end
-  else
-    begin
-      CheckBox1.Checked := false;
-      CheckBox2.Checked := true;
-    end;
-end;
-
-procedure TMain.checkClick2(Sender: TObject);
-begin
-  if CheckBox2.Checked then
-    begin
-      CheckBox2.Checked := true;
-      CheckBox1.Checked := false;
-    end
-  else
-    begin
-      CheckBox2.Checked := false;
-      CheckBox1.Checked := true;
-    end;
 end;
 
 function TMain.checkFieldEps(mode : Boolean):Boolean;
@@ -290,8 +329,20 @@ begin
        end;
    end
   else
-    begin
-      //arytmetyka przedzia³owa
+    begin //arytmetyka przedzia³owa
+      if edit_eps.Text = '' then
+        begin
+          showMessage('Pole dok³adnoœæ nie mo¿e byæ puste!');
+          Result := false;
+        end
+      else
+        begin
+          eps := Power(10, -(StrToInt(edit_eps.Text)));
+          intervaleps.a := left_read(FloatToStr(eps));
+          intervaleps.b := right_read(FloatToStr(eps));
+          Result := true;
+        end;
+
     end;
 end;
 

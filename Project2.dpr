@@ -4,7 +4,8 @@ uses
   Vcl.Forms,
   EAN in 'EAN.pas' {Main},
   NewtonMethod in 'NewtonMethod.pas',
-  IntervalArithmetic32and64 in 'IntervalArithmetic32and64.pas';
+  IntervalArithmetic32and64 in 'IntervalArithmetic32and64.pas',
+  NewtonIntervalMethod in 'NewtonIntervalMethod.pas';
 
 {$R *.res}
 
