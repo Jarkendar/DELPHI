@@ -222,18 +222,10 @@ begin
             //odpal funkcjê
             if CheckBox1.Checked then
               begin
-                iends_to_strings(intervalx, lewyKoniec, prawyKoniec);
-                showMessage('x0='+'['+lewyKoniec+';'+prawyKoniec+']');
-                iends_to_strings(intervaleps, lewyKoniec, prawyKoniec);
-                showMessage('eps='+'['+lewyKoniec+';'+prawyKoniec+']');
                 intervalx := NewtonInterval (intervalx, if1, idf1, mit, intervaleps, intervalfatx , it, st);
               end;
             if CheckBox2.Checked then
               begin
-                iends_to_strings(intervalx, lewyKoniec, prawyKoniec);
-                showMessage('x0='+'['+lewyKoniec+';'+prawyKoniec+']');
-                iends_to_strings(intervaleps, lewyKoniec, prawyKoniec);
-                showMessage('eps='+'['+lewyKoniec+';'+prawyKoniec+']');
                 intervalx := NewtonInterval (intervalx, if2, idf2, mit, intervaleps, intervalfatx , it, st);
               end;
             if st = 2 then
