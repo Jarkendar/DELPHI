@@ -74,8 +74,8 @@ begin
 
       it := it + 1;
 
-      if xit>x then maxInterval := xit
-      else maxInterval := x;
+      if iabs(xit)>iabs(x) then maxInterval := iabs(xit)
+      else maxInterval := iabs(x);
 
       if containtZero(maxInterval) then
         begin

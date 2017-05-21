@@ -58,7 +58,7 @@ begin
 
       it := it + 1;
 
-      if ((abs(xit-x)/Max(xit,x))<eps) then
+      if ((abs(xit-x)/Max(abs(xit),abs(x)))<eps) then
         begin
           break;
         end;
@@ -78,5 +78,4 @@ begin
         Result := xit;
       end;
 end;
-
 end.
